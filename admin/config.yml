@@ -1,18 +1,24 @@
 backend:
   name: git-gateway
-  branch: main # Вкажіть вашу головну гілку (main або master)
+  branch: main # Переконайтеся, що ваша головна гілка називається main
 
-media_folder: "images/uploads" # Куди зберігатимуться завантажені фото
-public_folder: "/images/uploads"
+media_folder: "images" # Папка, куди завантажуватимуться нові фото
+public_folder: "/images" # Шлях до фото на готовому сайті
 
 collections:
-  - name: "varta_catalog"
-    label: "Каталог Варта"
-    folder: "content/products" # Папка, де створюватимуться markdown-файли з товарами
+  - name: "garlands"
+    label: "Гірлянди (Каталог)"
+    folder: "content/garlands" # Папка, де зберігатимуться файли товарів
     create: true
-    slug: "{{slug}}"
+    slug: "{{article}}" # URL файлу буде формуватися з артикулу (наприклад, 6MBY.md)
     fields:
-      - {label: "Модель сигналізатора", name: "title", widget: "string"}
+      - {label: "Артикул", name: "article", widget: "string"}
+      - {label: "Назва гірлянди", name: "title", widget: "string"}
       - {label: "Головне фото", name: "image", widget: "image", required: false}
-      - {label: "Короткі характеристики", name: "description", widget: "text"}
-      - {label: "Технічний опис", name: "body", widget: "markdown"}
+      - {label: "Стара ціна (РРЦ), грн", name: "old_price", widget: "number", value_type: "int"}
+      - {label: "Акційна ціна, грн", name: "price", widget: "number", value_type: "int"}
+      - {label: "Залишок на складі, шт", name: "stock", widget: "number", value_type: "int"}
+      - {label: "Колір дроту", name: "wire_color", widget: "select", options: ["Чорний", "Білий", "Прозорий"]}
+      - {label: "Колір світіння", name: "light_color", widget: "string"}
+      - {label: "Короткий опис для картки", name: "description", widget: "text"}
+      - {label: "Детальний опис", name: "body", widget: "markdown"}
