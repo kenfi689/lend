@@ -1,4 +1,7 @@
 // === 1. ПЕРЕМИКАННЯ ВКЛАДОК ВІТРИНИ (SHOWCASE) ===
+let PRICE_SINGLE = 363;      // Акційна ціна за 1 шт з товари.xlsx
+let PRICE_WHOLESALE = 340;   // Спецціна / Гурт від 2 шт (-6.5%) з товари.xlsx
+let PRICE_OLD = 669;         // Стара/роздрібна ціна з товари.xlsx
 function switchShowcaseTab(targetId) {
   document.querySelectorAll('.showcase-tab').forEach(btn => {
     btn.classList.toggle('active', btn.dataset.tab === targetId);
