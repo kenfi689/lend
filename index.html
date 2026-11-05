@@ -290,7 +290,7 @@
 
                 <!-- Лінія 8: 50 см -->
                 <line x1="675" y1="107" x2="675" y2="245" stroke="#475569" stroke-width="2.5"/>
-                <circle cx="675" cy="130" r="5" fill="#fbbf24"/><circle cx="675" cy="158" r="5" fill="#fbbf24"/><circle cx="675" cy="186" r="7" fill="#ffffff" stroke="#fbbf24" stroke-width="3"/><circle cx="675" cy="214" r="5" fill="#fbbf24"/><circle cx="675" cy="245" r="5" fill="#fbbf24"/>
+                <circle cx="675" cy="130" r="5" fill="#fbbf24"/><circle cx="675" cy="158" r="5" fill="#fbbf24"/><circle cx="675" cy="186" r="7" fill="#ffffff" stroke="#fbbf24" stroke-width="3"/><circle cx="675" cy="214" r="5" fill="#fbbf24"/><circle cx="6екр75" cy="245" r="5" fill="#fbbf24"/>
 
                 <!-- Лінія 9: 30 см -->
                 <line x1="745" y1="107" x2="745" y2="188" stroke="#475569" stroke-width="2.5"/>
@@ -679,5 +679,40 @@
   </div>
 
   <script src="script.js"></script>
+<script>
+  // Функція для завантаження даних з data.json і оновлення сторінки
+  function loadCmsData() {
+    fetch('/data.json')
+      .then(response => {
+        if (!response.ok) {
+           // Якщо файлу ще немає (ви ще нічого не зберегли в адмінці), просто використовуємо дефолтні значення HTML
+           throw new Error('Дані ще не створено');
+        }
+        return response.json();
+      })
+      .then(data => {
+         // Оновлюємо дані на сторінці (приклад, як це зв'язати з вашим скриптом)
+         if (data.promo_price) window.PRICE_SINGLE = data.promo_price;
+         if (data.wholesale_price) window.PRICE_WHOLESALE = data.wholesale_price;
+         if (data.old_price) window.PRICE_OLD = data.old_price;
+         
+         // Оновлюємо відображення на сторінці, якщо потрібно, або просто запускаємо ваш калькулятор з новими даними
+         if (typeof updateCalculator === 'function') {
+            updateCalculator(Number(document.getElementById('calcRange').value) || 12);
+            updateOrderFormSummary(2); // Оновлюємо форму замовлення
+         }
+         
+         // Оновлення текстових елементів (приклад, вам треба буде додати ID до потрібних span в HTML)
+         const stockElements = document.querySelectorAll('.stock-value'); // Додайте клас .stock-value до місць з "448 шт"
+         if (data.stock && stockElements.length) {
+            stockElements.forEach(el => el.textContent = data.stock);
+         }
+      })
+      .catch(error => console.log('Використовуються стандартні дані:', error));
+  }
+
+  // Викликаємо функцію після завантаження сторінки
+  document.addEventListener('DOMContentLoaded', loadCmsData);
+</script>
 </body>
 </html>
