@@ -1,24 +1,19 @@
 backend:
   name: git-gateway
-  branch: main # Переконайтеся, що ваша головна гілка називається main
+  branch: main 
 
-media_folder: "images" # Папка, куди завантажуватимуться нові фото
-public_folder: "/images" # Шлях до фото на готовому сайті
+media_folder: "images"
+public_folder: "/images"
 
 collections:
-  - name: "garlands"
-    label: "Гірлянди (Каталог)"
-    folder: "content/garlands" # Папка, де зберігатимуться файли товарів
-    create: true
-    slug: "{{article}}" # URL файлу буде формуватися з артикулу (наприклад, 6MBY.md)
-    fields:
-      - {label: "Артикул", name: "article", widget: "string"}
-      - {label: "Назва гірлянди", name: "title", widget: "string"}
-      - {label: "Головне фото", name: "image", widget: "image", required: false}
-      - {label: "Стара ціна (РРЦ), грн", name: "old_price", widget: "number", value_type: "int"}
-      - {label: "Акційна ціна, грн", name: "price", widget: "number", value_type: "int"}
-      - {label: "Залишок на складі, шт", name: "stock", widget: "number", value_type: "int"}
-      - {label: "Колір дроту", name: "wire_color", widget: "select", options: ["Чорний", "Білий", "Прозорий"]}
-      - {label: "Колір світіння", name: "light_color", widget: "string"}
-      - {label: "Короткий опис для картки", name: "description", widget: "text"}
-      - {label: "Детальний опис", name: "body", widget: "markdown"}
+  - name: "pages"
+    label: "Редагування сайту"
+    files:
+      - label: "Головна сторінка"
+        name: "home"
+        file: "data.json" # CMS буде зберігати дані у цей файл
+        fields:
+          - {label: "Головний заголовок", name: "title", widget: "string", default: "Гірлянда Бахрома вулична 105 LED"}
+          - {label: "Акційна ціна, ₴", name: "price", widget: "string", default: "363"}
+          - {label: "Стара ціна, ₴", name: "old_price", widget: "string", default: "669"}
+          - {label: "Залишок на складі, шт", name: "stock", widget: "string", default: "448"}
