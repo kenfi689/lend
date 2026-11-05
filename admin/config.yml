@@ -7,13 +7,14 @@ public_folder: "/images"
 
 collections:
   - name: "pages"
-    label: "Редагування сайту"
+    label: "Налаштування сторінки"
     files:
-      - label: "Головна сторінка"
+      - label: "Головна"
         name: "home"
-        file: "data.json" # CMS буде зберігати дані у цей файл
+        file: "data.json"
         fields:
-          - {label: "Головний заголовок", name: "title", widget: "string", default: "Гірлянда Бахрома вулична 105 LED"}
-          - {label: "Акційна ціна, ₴", name: "price", widget: "string", default: "363"}
-          - {label: "Стара ціна, ₴", name: "old_price", widget: "string", default: "669"}
-          - {label: "Залишок на складі, шт", name: "stock", widget: "string", default: "448"}
+          - {label: "Заголовок сторінки", name: "title", widget: "string", default: "Гірлянда Бахрома вулична 105 LED"}
+          - {label: "Акційна ціна (грн)", name: "promo_price", widget: "number", value_type: "int", default: 363}
+          - {label: "Гуртова ціна від 2 шт (грн)", name: "wholesale_price", widget: "number", value_type: "int", default: 340}
+          - {label: "Стара ціна (грн)", name: "old_price", widget: "number", value_type: "int", default: 669}
+          - {label: "Залишок на складі", name: "stock", widget: "number", value_type: "int", default: 448}
